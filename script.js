@@ -9,5 +9,9 @@ function callback() {
   body.classList.add("show-floater");
 }
 
+function fallback() {
+  body.classList.remove("show-floater");
+}
+
 input.addEventListener("focusin", callback);
-input.addEventListener("focusout", callback);
+input.addEventListener("focusout", fallback);
