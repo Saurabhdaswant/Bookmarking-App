@@ -1,0 +1,11 @@
+body {
+  padding: 3rem;
+}
+
+.form-control {
+  padding: 1rem;
+}
+
+.show-floater .form-control {
+  padding: 4rem;
+}
