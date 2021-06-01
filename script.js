@@ -15,19 +15,18 @@ input.addEventListener("focusout", fallback);
 
 //======================================================================
 
-const bookmark = document.querySelector(".bookmark");
-const links = document.querySelector(".links");
+const bookmarkList = document.querySelector(".bookmarkList");
 const form = document.querySelector(".form");
 
 function createBookmark(e) {
   e.preventDefault();
   const takeValue = input.value;
   const bookmarkLink = document.createElement("a");
-  bookmarkLink.className = "bookmark";
+  bookmarkLink.className = "mainContent";
   bookmarkLink.textContent = takeValue;
   bookmarkLink.href = "#";
   bookmarkLink.target = "_blank";
-  links.appendChild(bookmarkLink);
+  bookmarkList.appendChild(bookmarkLink);
 
   form.reset();
 }
