@@ -11,8 +11,9 @@
 }
 
 body {
-  background-image: url(img/wp1890614.jpg);
-  background-origin: content-box;
+  background-image: url(img/tom.jpg);
+  /* background-position: bottom; */
+  background-repeat: no-repeat;
 }
 
 main {

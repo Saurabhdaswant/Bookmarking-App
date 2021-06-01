@@ -14,6 +14,7 @@ input.addEventListener("focusin", callback);
 input.addEventListener("focusout", fallback);
 
 //======================================================================
+
 const bookmark = document.querySelector(".bookmark");
 const links = document.querySelector(".links");
 const bookmarkForm = document.querySelector(".bookmark-form");
@@ -27,6 +28,8 @@ function createBookmark(e) {
   bookmarkLink.href = "#";
   bookmarkLink.target = "_blank";
   links.appendChild(bookmarkLink);
+
+  bookmarkForm.reset();
 }
 
 bookmarkForm.addEventListener("submit", createBookmark);
