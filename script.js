@@ -18,7 +18,9 @@ input.addEventListener("focusout", fallback);
 const bookmarkList = document.querySelector(".bookmarkList");
 const bookmarkForm = document.querySelector(".form");
 const bookmarkFormInput = bookmarkForm.querySelector("input[type=text]");
-const bookmarks = [];
+const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+
+fillbookmarksList(bookmarks);
 
 function createBookmark(e) {
   e.preventDefault();
@@ -30,6 +32,8 @@ function createBookmark(e) {
   };
   bookmarks.push(bookmark);
   fillbookmarksList(bookmarks);
+  storeBookmarks(bookmarks);
+  bookmarkForm.reset();
 
   console.table(bookmarks);
   //save that bookmarks list to  the local storage
@@ -42,8 +46,6 @@ function createBookmark(e) {
   // bookmark.href = "#";
   // bookmark.target = "_blank";
   // bookmarkList.appendChild(bookmark);
-
-  bookmarkForm.reset();
 }
 
 function fillbookmarksList(bookmarks = []) {
@@ -56,6 +58,7 @@ function fillbookmarksList(bookmarks = []) {
     `;
     })
     .join("");
+  bookmarkList.innerHTML = bookmarksHtml;
 
   // let bookmarksHtml = "";
   // for (let i = 0; i < bookmarks.length; i++) {
@@ -65,9 +68,11 @@ function fillbookmarksList(bookmarks = []) {
   //   </a>
   //   `;
   // }
+  // console.log(bookmarksHtml);
+}
 
-  console.log(bookmarksHtml);
-  bookmarkList.innerHTML = bookmarksHtml;
+function storeBookmarks(bookmark = []) {
+  localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 }
 
 bookmarkForm.addEventListener("submit", createBookmark);
