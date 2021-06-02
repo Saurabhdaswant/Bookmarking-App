@@ -17,10 +17,12 @@ input.addEventListener("focusout", fallback);
 
 const bookmarkList = document.querySelector(".bookmarkList");
 const form = document.querySelector(".form");
+const formInput = form.querySelector("input[type=text]");
+const bookmarks = [];
 
 function createBookmark(e) {
   e.preventDefault();
-  const takeValue = input.value;
+  const takeValue = formInput.value;
   const bookmarkLink = document.createElement("a");
   bookmarkLink.className = "mainContent";
   bookmarkLink.textContent = takeValue;

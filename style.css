@@ -33,6 +33,11 @@ body {
   background-color: #eeeeee;
 }
 
+/* .realbookmark {
+  padding: 1rem;
+  background-color: #ff0000;
+} */
+
 .bookmarkList {
   display: flex;
   flex-direction: column;
