@@ -16,22 +16,26 @@ input.addEventListener("focusout", fallback);
 //======================================================================
 
 const bookmarkList = document.querySelector(".bookmarkList");
-const form = document.querySelector(".form");
-const formInput = form.querySelector("input[type=text]");
+const bookmarkForm = document.querySelector(".form");
+const bookmarkFormInput = bookmarkForm.querySelector("input[type=text]");
 const bookmarks = [];
 
 function createBookmark(e) {
   e.preventDefault();
-  const takeValue = formInput.value;
-  const bookmarkLink = document.createElement("a");
-  bookmarkLink.className = "mainContent";
-  bookmarkLink.textContent = takeValue;
-  bookmarkLink.href = "#";
-  bookmarkLink.target = "_blank";
-  bookmarkList.appendChild(bookmarkLink);
 
-  form.reset();
+  //add a new bookmark (item === bookmark) to the bookmarks (array)
+  //save that bookmarks list to  the local storage
+  const userInput = bookmarkFormInput.value;
+  const bookmark = document.createElement("a");
+  //the bookmark === a tag  which will born after submit
+  bookmark.className = "mainContent";
+  bookmark.textContent = userInput;
+  bookmark.href = "#";
+  bookmark.target = "_blank";
+  bookmarkList.appendChild(bookmark);
+
+  bookmarkForm.reset();
 }
 
-form.addEventListener("submit", createBookmark);
-form.addEventListener("submit", fallback);
+bookmarkForm.addEventListener("submit", createBookmark);
+bookmarkForm.addEventListener("submit", fallback);
