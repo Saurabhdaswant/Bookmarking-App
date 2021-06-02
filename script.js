@@ -47,14 +47,24 @@ function createBookmark(e) {
 }
 
 function fillbookmarksList(bookmarks = []) {
-  let bookmarksHtml = "";
-  for (let i = 0; i < bookmarks.length; i++) {
-    bookmarksHtml += `
+  const bookmarksHtml = bookmarks
+    .map((bookmark) => {
+      return `
     <a href = "#" class = "mainContent">
-    ${bookmarks[i].title}
+      ${bookmark.title}
     </a> 
     `;
-  }
+    })
+    .join("");
+
+  // let bookmarksHtml = "";
+  // for (let i = 0; i < bookmarks.length; i++) {
+  //   bookmarksHtml += `
+  //   <a href = "#" class = "mainContent">
+  //   ${bookmarks[i].title}
+  //   </a>
+  //   `;
+  // }
 
   console.log(bookmarksHtml);
   bookmarkList.innerHTML = bookmarksHtml;
