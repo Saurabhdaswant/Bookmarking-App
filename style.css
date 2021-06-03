@@ -15,6 +15,10 @@ body {
   background-repeat: no-repeat;
 }
 
+a {
+  text-decoration: none;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -43,6 +47,29 @@ body {
   flex-direction: column;
 }
 
+.bookmarkList .mainContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainContent .img {
+  background-color: rgb(236, 47, 47);
+  background-image: url("https://pbs.twimg.com/profile_images/1394658653085609984/b9zpPXqX_400x400.jpg");
+  background-size: cover;
+  width: 5rem;
+  height: 5rem;
+}
+
+.mainContent .title {
+  display: flex;
+  align-items: center;
+}
+
+.mainContent .glyphicon {
+  position: relative;
+  font-size: 2rem;
+  cursor: pointer;
+}
 button {
   cursor: pointer;
   border-radius: 10px;

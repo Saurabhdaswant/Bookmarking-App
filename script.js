@@ -50,15 +50,19 @@ function createBookmark(e) {
 
 function fillbookmarksList(bookmarks = []) {
   const bookmarksHtml = bookmarks
-    .map((bookmark) => {
+    .map((bookmark, i) => {
       return `
-    <a href = "#" class = "mainContent">
-      ${bookmark.title}
+    <a href = "#" class = "mainContent" data-id=${i}>
+      <div class="img"></div>
+      <div class="title">${bookmark.title}</div>
+      <span class="glyphicon glyphicon-remove">*</span>
     </a> 
     `;
     })
     .join("");
   bookmarkList.innerHTML = bookmarksHtml;
+
+  // localStorage.clear();
 
   // let bookmarksHtml = "";
   // for (let i = 0; i < bookmarks.length; i++) {
@@ -71,9 +75,25 @@ function fillbookmarksList(bookmarks = []) {
   // console.log(bookmarksHtml);
 }
 
+function removeBookmark(e) {
+  console.log(e);
+
+  if (!e.target.matches(".glyphicon-remove")) return;
+
+  //find the index
+  //remove from the bookmarklist using splice
+  //flill the list
+  //store back the localstrorage
+  const index = e.target.parentNode.dataset.id;
+  bookmarks.splice(index, 1);
+  fillbookmarksList(bookmarks);
+  storeBookmarks(bookmarks);
+}
+
 function storeBookmarks(bookmark = []) {
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 }
 
 bookmarkForm.addEventListener("submit", createBookmark);
 bookmarkForm.addEventListener("submit", fallback);
+bookmarkList.addEventListener("click", removeBookmark);
