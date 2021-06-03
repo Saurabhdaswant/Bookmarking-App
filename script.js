@@ -40,7 +40,7 @@ function createBookmark(e) {
 
   // const userInput = bookmarkFormInput.value;
   // const bookmark = document.createElement("a");
-  //the bookmark === a tag  which will born after submit
+  // the bookmark === a tag  which will born after submit
   // bookmark.className = "mainContent";
   // bookmark.textContent = userInput;
   // bookmark.href = "#";
