@@ -92,7 +92,7 @@ function removeBookmark(e) {
 
   if (!e.target.matches(".x")) return;
 
-  console.log("fuck");
+  console.log("clicked X");
 
   //find the index
   //remove from the bookmarklist using splice
