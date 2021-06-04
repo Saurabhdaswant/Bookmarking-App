@@ -49,15 +49,16 @@ a {
 
 .bookmarkList .mainContent {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .mainContent .img {
-  background-color: rgb(236, 47, 47);
   background-image: url("https://pbs.twimg.com/profile_images/1394658653085609984/b9zpPXqX_400x400.jpg");
   background-size: cover;
-  width: 5rem;
+  background-position: top center;
+  width: 8rem;
   height: 5rem;
+  margin-right: 1rem;
 }
 
 .mainContent .title {
@@ -65,11 +66,13 @@ a {
   align-items: center;
 }
 
-.mainContent .glyphicon {
-  position: relative;
-  font-size: 2rem;
-  cursor: pointer;
+.x {
+  padding: 1em;
+  /* margin-left: 41rem;
+  margin-top: -9rem; */
+  color: rgb(255, 0, 0);
 }
+
 button {
   cursor: pointer;
   border-radius: 10px;

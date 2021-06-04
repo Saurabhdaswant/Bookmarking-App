@@ -11,7 +11,7 @@ function fallback() {
 }
 
 input.addEventListener("focusin", callback);
-input.addEventListener("focusout", fallback);
+// input.addEventListener("focusout", fallback);
 
 //======================================================================
 
@@ -19,23 +19,33 @@ const bookmarkList = document.querySelector(".bookmarkList");
 const bookmarkForm = document.querySelector(".form");
 const bookmarkFormInput = bookmarkForm.querySelector("input[type=text]");
 const bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+const apiUrl = "https://opengraph.io/api/1.0/site";
+const appId = "58858c7bcf07b61e64257391";
 
 fillbookmarksList(bookmarks);
 
 function createBookmark(e) {
   e.preventDefault();
 
-  //add a new bookmark (item === bookmark) to the bookmarks (array)
-  const userInput = bookmarkFormInput.value;
-  const bookmark = {
-    title: userInput,
-  };
-  bookmarks.push(bookmark);
-  fillbookmarksList(bookmarks);
-  storeBookmarks(bookmarks);
-  bookmarkForm.reset();
+  const url = encodeURIComponent(bookmarkFormInput.value);
 
-  console.table(bookmarks);
+  //add a new bookmark (item === bookmark) to the bookmarks (array)
+  fetch(`${apiUrl}/${url}?app_id=${appId}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const bookmark = {
+        title: data.hybridGraph.title,
+        image: data.hybridGraph.image,
+        link: data.hybridGraph.url,
+      };
+
+      bookmarks.push(bookmark);
+      fillbookmarksList(bookmarks);
+      storeBookmarks(bookmarks);
+      bookmarkForm.reset();
+    });
+
+  // console.table(bookmarks);
   //save that bookmarks list to  the local storage
 
   // const userInput = bookmarkFormInput.value;
@@ -52,11 +62,13 @@ function fillbookmarksList(bookmarks = []) {
   const bookmarksHtml = bookmarks
     .map((bookmark, i) => {
       return `
-    <a href = "#" class = "mainContent" data-id=${i}>
-      <div class="img"></div>
-      <div class="title">${bookmark.title}</div>
-      <span class="glyphicon glyphicon-remove">*</span>
+    <a href = "${bookmark.link}" class="mainContent" data-id=${i}>
+      
+      <div class="img" style="background-image:url(${bookmark.image})"></div>
+      <span class="title">${bookmark.title}</span>
+      <div class="x">x</div>
     </a> 
+    
     `;
     })
     .join("");
@@ -78,7 +90,9 @@ function fillbookmarksList(bookmarks = []) {
 function removeBookmark(e) {
   console.log(e);
 
-  if (!e.target.matches(".glyphicon-remove")) return;
+  if (!e.target.matches(".x")) return;
+
+  console.log("fuck");
 
   //find the index
   //remove from the bookmarklist using splice
@@ -90,10 +104,12 @@ function removeBookmark(e) {
   storeBookmarks(bookmarks);
 }
 
-function storeBookmarks(bookmark = []) {
+function storeBookmarks(bookmarks = []) {
   localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
 }
 
 bookmarkForm.addEventListener("submit", createBookmark);
 bookmarkForm.addEventListener("submit", fallback);
 bookmarkList.addEventListener("click", removeBookmark);
+
+// localStorage.clear();
